@@ -1,0 +1,69 @@
+apt install g++ autoconf libfontconfig1-dev pkg-config libjpeg-dev  gnome-common libglib2.0-dev gtk-doc-tools libyelp-dev yelp-tools gobject-introspection libsecret-1-dev libnautilus-extension-dev
+apt-get install cmake
+apt-get python-pip
+pip install pdf2image
+pip3 install PIL
+pip3 install pytesseract
+pip3 install pdf2image
+apt-get install tesseract-ocr
+apt-get install python-poppler
+
+INSTALL poppler
+https://gist.github.com/Dayjo/618794d4ff37bb82ddfb02c63b450a81
+
+INSTALL tranning data of languages
+https://github.com/tesseract-ocr/tesseract/wiki  (UBUNTU 18.04)
+
+
+First install all these prerequisites for compiling:
+
+sudo apt install g++ autoconf libfontconfig1-dev pkg-config libjpeg-dev libopenjpeg-dev gnome-common libglib2.0-dev gtk-doc-tools libyelp-dev yelp-tools gobject-introspection libsecret-1-dev libnautilus-extension-dev
+
+First download the encoding files (no need to compile these) to the current working directory
+
+wget https://poppler.freedesktop.org/poppler-data-0.4.7.tar.gz
+
+Extract (it does untar cleanly):
+
+tar -xf poppler-data-0.4.7.tar.gz
+
+Enter the directory
+
+cd poppler-data-0.4.7
+
+And magically send the files to the right locations in /usr/share with:
+
+sudo make install
+
+Now go back up one level
+
+cd ..
+
+Download & extract the main package:
+
+wget https://poppler.freedesktop.org/poppler-0.48.0.tar.xz
+tar -xf poppler-0.48.0.tar.xz
+cd poppler-0.48.0
+
+Now run the configure file like this:
+
+./configure
+
+Here you will get errors if I missed anything from my list of dependencies above. The errors might be illuminating eg 'thing-you-need not found' in which case you can try sudo apt install thing-you-need and try again. If that doesn't work, try searching online for the error message.
+
+If it exits without errors you can run:
+
+make
+
+Which will take a while. When it's done, you can use
+
+sudo make install
+
+If you use sudo make install you can still uninstall at any time by entering the source directory (so keep it!) and typing sudo make uninstall
+
+Symlink the binaries to the /usr/bin directory
+
+sudo ln -s /usr/local/bin/pdftotext /usr/bin/pdftotext
+sudo ln -s /usr/local/bin/pdftoppm /usr/bin/pdftoppm
+sudo ln -s /usr/local/lib/libpoppler.so.64 /usr/lib/libpoppler.so.64
+
